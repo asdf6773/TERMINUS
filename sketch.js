@@ -9,7 +9,7 @@ const RADIUS = 50;
 const SEGMENTS = 10;
 const RINGS = 10;
 var particles = [];
-var MAX_POINTS = 2;
+var MAX_POINTS = 200;
 for (var i = 0; i < MAX_POINTS; i++) {
     particles.push(new Particle());
 }
@@ -39,32 +39,29 @@ var pushRad = 50;
 var vShader = $('#vertexshader');
 var fShader = $('#fragmentshader');
 var geometry = new THREE.BufferGeometry();
-//var opacity = new Float32Array(MAX_POINTS);
 var positions = new Float32Array(MAX_POINTS * 3);
-geometry.addAttribute('position', new THREE.BufferAttribute(positions, 3));
-//geometry.addAttribute('opacity', new THREE.BufferAttribute(opacity, 1));
+var attrib = new THREE.BufferAttribute(positions, 3);
+geometry.addAttribute('position', attrib);
 
-var material = new THREE.LineBasicMaterial({
-    color: 0xffffff,
-    opacity: 1,
-    linewidth: 3,
-    //vertexColors: THREE.VertexColors
+
+var material = new THREE.PointsMaterial({
+    //  color: 0xffffff,
 });
 
 // line
-line = new THREE.Line(geometry, material);
+line = new THREE.Points(geometry, material);
 scene.add(line);
+console.log(line.geometry.attributes.position.needsUpdate);
 
-
-//opacity = line.geometry.attributes.opacity.array;
 positions = line.geometry.attributes.position.array;
 var x = y = z = index = 0;
 for (var i = 0, l = MAX_POINTS; i < l; i++) {
     //    opacity[i] = 0.5;
-    positions[index++] = particles[i].x;
-    positions[index++] = particles[i].y;
-    positions[index++] = particles[i].z;
+    positions[index++] = particles[i].pos.x;
+    positions[index++] = particles[i].pos.y;
+    positions[index++] = particles[i].pos.z;
 }
+
 // draw range
 drawCount = 10; // draw the first 2 points, only
 geometry.setDrawRange(0, drawCount);
@@ -84,39 +81,42 @@ function update() { ///////why vector can't use=?
     mouseV.y = mouse.y;
     mouseV.z = mouse.z;
     dx = new THREE.Vector3().subVectors(mouseV, pMouseV);
-    console.log(dx.length());
+    //  console.log(particles[0].pos);
     for (var i = 0; i < particles.length; i++) {
         var mouseTemp = mouseV;
         var A = particles[i];
         if (Math.abs(dx.x) < pushRad) {
             if (Math.abs(dx.y) < pushRad) {
-                if (dx.length() < pushRad) {
-                    //        console.log(particles.length);
-                    //dx.normalize();
-                    // A.f.add(PVector.mult(dx, 0.8));
-                    var temp = new THREE.Vector3().subVectors(mouseV, pMouseV);
-                    temp.subVectors(temp, A.vel);
-                    temp.multiplyScalar(1.5);
-                    A.vel.addVectors(A.vel, temp);
-
+                if (Math.abs(dx.z) < pushRad) {
+                    if (dx.length() < pushRad) {
+                        //dx.normalize();
+                        // A.f.add(PVector.mult(dx, 0.8));
+                        var temp = new THREE.Vector3().subVectors(mouseV, pMouseV);
+                        temp.subVectors(temp, A.vel);
+                        temp.multiplyScalar(0.5);
+                        A.vel.addVectors(A.vel, temp);
+                    }
                 }
             }
         }
-        // console.log(particles.length);
-
         A.update();
     }
+    index = 0;
 
     //  console.log(mouseV);
+
     for (var i = 0, l = MAX_POINTS; i < l; i++) {
-        positions[index++] = particles[i].x;
-        positions[index++] = particles[i].y;
-        positions[index++] = particles[i].z;
+        positions[index++] = particles[i].pos.x;
+        positions[index++] = particles[i].pos.y;
+        positions[index++] = particles[i].pos.z;
+
     }
-    line.geometry.attributes.position.needsUpdate = true;
 
+    //line.geometry.attributes.position.dynamic = true;
+    //    geometry.dynamic = true;
+
+    geometry.attributes.position.needsUpdate = true;
     geometry.setDrawRange(0, 10);
-
     pMouseV.x = mouseV.x;
     pMouseV.y = mouseV.y;
     pMouseV.z = mouseV.z;
@@ -124,7 +124,6 @@ function update() { ///////why vector can't use=?
     requestAnimationFrame(update);
     frame += 0.1;
     //i = 0;
-
 }
 
 requestAnimationFrame(update);
