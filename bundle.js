@@ -1,10 +1,11 @@
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 //var camera = new THREE.OrthographicCamera(innerWidth / -2, innerWidth, innerHeight / 2, innerHeight / -2,1,1000) ////1
 //var Noise = require('noisejs');
 //var vShader = $('#vertexshader');
 //var fShader = $('#fragmentshader');
 var glslify = require('glslify')
-var vShader = glslify('./shaders/line.vert')
-var fShader = glslify('./shaders/line.frag')
+var vShader = glslify(["#ifdef GL_ES\nprecision highp float;\n#define GLSLIFY 1\n#endif\nuniform float thickness;\nattribute float lineMiter;\nattribute vec2 lineNormal;\nuniform vec2 mouse;\n\nvoid main() {\n  vec2 pointPos = position.xy + vec2(lineNormal * thickness / 2.0 * lineMiter);\n\n  gl_PointSize = 2.0;\n\n  gl_Position = projectionMatrix * modelViewMatrix * vec4(pointPos, 0.0, 1.0);\n}\n"])
+var fShader = glslify(["#ifdef GL_ES\nprecision highp float;\n#define GLSLIFY 1\n#endif\nuniform vec3 diffuse;\nvarying vec3 vNormal;\nuniform float opacity;\nvec4 color;\nvoid main() { gl_FragColor = vec4(1.0, 1.0, 1.0, 0.4); }\n"])
 document.body.addEventListener('onmousemove',show_coords,false)
 console.log(vShader);
 
@@ -154,3 +155,17 @@ function update() { ///////why vector can't use=?
 }
 
 requestAnimationFrame(update);
+
+},{"glslify":2}],2:[function(require,module,exports){
+module.exports = function(strings) {
+  if (typeof strings === 'string') strings = [strings]
+  var exprs = [].slice.call(arguments,1)
+  var parts = []
+  for (var i = 0; i < strings.length-1; i++) {
+    parts.push(strings[i], exprs[i] || '')
+  }
+  parts.push(strings[i])
+  return parts.join('')
+}
+
+},{}]},{},[1]);
