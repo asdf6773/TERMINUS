@@ -1,11 +1,36 @@
 {
-  "name": "c",
+  "name": "1",
   "version": "1.0.0",
   "description": "",
   "main": "sketch.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "browserify index.js -o bundle.js",
+    "watch": "watchify index.js -o bundle.js",
+    "dev": "budo index.js:bundle.js --live"
   },
   "author": "zhangyang",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/asdf6773/TERMINUS.git"
+  },
+  "bugs": {
+    "url": "https://github.com/asdf6773/TERMINUS/issues"
+  },
+  "homepage": "https://github.com/asdf6773/TERMINUS#readme",
+  "dependencies": {
+    "browserify": "^14.1.0",
+    "glslify": "^6.0.2",
+    "glslify-hex": "^2.1.1"
+  },
+  "glslify": {
+    "transform": [
+      "glslify-hex"
+    ]
+  },
+  "browserify": {
+    "transform": [
+      "glslify"
+    ]
+  }
 }
