@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var inherits = require('inherits');
 var getNormals = require('polyline-normals');
 var VERTS_PER_POINT = 2;
@@ -62,6 +63,40 @@ module.exports = function createLineMesh (THREE) {
       if (attrDistance) {
         attrDistance.array = new Float32Array(count);
       }
+=======
+//var camera = new THREE.OrthographicCamera(innerWidth / -2, innerWidth, innerHeight / 2, innerHeight / -2,1,1000) ////1
+//var Noise = require('noisejs');
+//var vShader = $('#vertexshader');
+//var fShader = $('#fragmentshader');
+var glslify = require('glslify')
+var vShader = glslify('./shaders/line.vert')
+var fShader = glslify('./shaders/line.frag')
+document.body.addEventListener('onmousemove',show_coords,false)
+console.log(vShader)
+var uniforms = {
+    amplitude: {
+        type: 'float',
+        value: 0
+    },
+    mouse: {
+        type: 'vec2',
+        value: new THREE.Vector2(0, 0)
+    },
+    seed: {
+        type: 'float',
+        value: 0.001
+    },
+    thickness: {
+        type: 'float',
+        value: 100.0
+    },
+    opacity: {
+      type:'f',
+      value: 1.0
+    },
+    diffuse: {
+      type:'c', value: new THREE.Color(20,100,100)
+>>>>>>> parent of 0babbd8... add build script add bundle
     }
 
     if (undefined !== attrPosition.count) {

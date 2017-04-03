@@ -1,4 +1,7 @@
 {
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
   "name": "three-line-2d",
   "version": "1.1.6",
   "description": "lines expanded in a vertex shader",
@@ -59,5 +62,50 @@
   "homepage": "https://github.com/mattdesl/three-line-2d",
   "bugs": {
     "url": "https://github.com/mattdesl/three-line-2d/issues"
+=======
+=======
+>>>>>>> parent of 0babbd8... add build script add bundle
+=======
+>>>>>>> parent of 0babbd8... add build script add bundle
+  "name": "1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "sketch.js",
+  "scripts": {
+    "build": "browserify index.js -o bundle.js",
+    "watch": "watchify index.js -o bundle.js",
+    "dev": "budo index.js:bundle.js --live"
+  },
+  "author": "zhangyang",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/asdf6773/TERMINUS.git"
+  },
+  "bugs": {
+    "url": "https://github.com/asdf6773/TERMINUS/issues"
+  },
+  "homepage": "https://github.com/asdf6773/TERMINUS#readme",
+  "dependencies": {
+    "browserify": "^14.1.0",
+    "glslify": "^6.0.2",
+    "glslify-hex": "^2.1.1"
+  },
+  "glslify": {
+    "transform": [
+      "glslify-hex"
+    ]
+  },
+  "browserify": {
+    "transform": [
+      "glslify"
+    ]
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 0babbd8... add build script add bundle
+=======
+>>>>>>> parent of 0babbd8... add build script add bundle
+=======
+>>>>>>> parent of 0babbd8... add build script add bundle
   }
 }
