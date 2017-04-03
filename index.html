@@ -1,71 +1,17 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-	<meta charset=utf-8>
-	<title>My first three.js app</title>
-	<style>
-		body {
-			margin: 0;
-		}
-
-		canvas {
-			width: 100%;
-			height: 100%
-		}
-	</style>
+    <meta charset="UTF-8">
+    <title>three-line-2d</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+    </style>
 </head>
-
-<body id="threejs"  style='overflow:hidden'><!--<body id="threejs" onmousemove="show_coords(event)" style='overflow:hidden'> -->
-	<!--<script type="x-shader/x-vertex" id="vertexshader">
-
-
-
-
-
-	  #ifdef GL_ES
-		precision highp float;
-		#endif
-		uniform float thickness;
-    attribute float lineMiter;
-    attribute vec2 lineNormal;
-		uniform vec2 mouse;
-
-
-		void main() {
-  	vec2 pointPos = position.xy + vec2(lineNormal*thickness/2.0*lineMiter);
-
-			  gl_PointSize = 2.0;
-
-		  gl_Position = projectionMatrix *
-		                modelViewMatrix *
-		                vec4(pointPos,0.0,1.0);
-		}
-	</script>
-
-	<script type="x-shader/x-fragment" id="fragmentshader">
-
-	  #ifdef GL_ES
-		precision highp float;
-		#endif
-		uniform vec3 diffuse;
-		varying vec3 vNormal;
-		uniform float opacity;
-		vec4 color;
-		void main() {
-			gl_FragColor = vec4(
-  1.0,1.0,1.0,0.4)	;
-     }
-
-	</script>-->
-
-	<script src="js/jquery.js"></script>
-	<script src="js/three.min.js"></script>
-	<script src="particles.js"></script>
-	<script src="bundle.js"></script>
-	<script>
-		// Our Javascript will go here.
-	</script>
+<body>
+    <script src="bundle.js"></script>
 </body>
-
 </html>
