@@ -17,7 +17,8 @@
   "dependencies": {
     "inherits": "^2.0.1",
     "object-assign": "^4.0.1",
-    "polyline-normals": "^2.0.0"
+    "polyline-normals": "^2.0.0",
+    "touch-position": "^2.0.0"
   },
   "devDependencies": {
     "adaptive-bezier-curve": "^1.0.3",

@@ -30,7 +30,7 @@ function createApp (opt) {
   document.body.appendChild(canvas);
 
   // 3D camera looking
-  const camera = new THREE.PerspectiveCamera(60, 1, 0.01, 1000);
+  const camera = new THREE.PerspectiveCamera(60, 1, 0.01, 10000);
   const target = new THREE.Vector3();
 
   // 3D scene
@@ -41,8 +41,8 @@ function createApp (opt) {
     canvas: canvas,
     theta: 5 * Math.PI / 180,
     phi: -90 * Math.PI / 180,
-    distance: 300,
-    distanceBounds: [ 2, 300 ]
+    distance: 1000,
+    distanceBounds: [ 2, 1000 ]
   }, opt));
 
   // Update frame size
